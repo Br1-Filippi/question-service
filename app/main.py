@@ -6,7 +6,7 @@ import os
 
 app = FastAPI()
 
-#Cors
+#Cors allow origins from environment variable
 origins_raw = os.getenv("MOODLE", "")
 origins = [o.strip() for o in origins_raw.split(",") if o.strip()]
 

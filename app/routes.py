@@ -9,13 +9,9 @@ router = APIRouter()
 def read_root():
     return {"message": "Pudiste comunicarte con el servicio de generación de banco de preguntas :3 ¡Bienvenido!"}
 
-@router.post("/generate-xml")
+@router.post("/run-code",)
 def generate_question_bank(request: CodeRequest):
-    output_path = run_code(request.code)
-    if output_path.startswith("ERROR"):
-        raise HTTPException(status_code=400, detail=output_path)
-    return FileResponse(
-        output_path,
-        filename="banco_moodle.xml",
-        media_type="application/xml"
-    )
+    result = run_code(request.code)
+    if result.startswith("ERROR"):
+        raise HTTPException(status_code=400, detail=result)
+    return {"message": "El código se ejecutó correctamente"}
