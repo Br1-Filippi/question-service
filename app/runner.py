@@ -1,7 +1,7 @@
 import subprocess
 import uuid
 import os
-from config import settings
+from app.config import settings
 
 def run_code(code: str) -> str:
     os.makedirs(settings.UPLOAD_DIR, exist_ok=True)

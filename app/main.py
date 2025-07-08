@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from runner import run_code
+from app.runner import run_code
 
 app = FastAPI()
 
