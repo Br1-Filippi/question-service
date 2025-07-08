@@ -7,7 +7,7 @@ import os
 app = FastAPI()
 
 #Cors
-origins_raw = os.getenv("CORS_ORIGINS", "")
+origins_raw = os.getenv("MOODLE", "")
 origins = [o.strip() for o in origins_raw.split(",") if o.strip()]
 
 app.add_middleware(
@@ -18,6 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Include the routes
 app.include_router(router)
 
 
