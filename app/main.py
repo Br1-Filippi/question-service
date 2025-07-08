@@ -1,9 +1,24 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 from app.runner import run_code
 
 app = FastAPI()
+
+#Cors
+origins_raw = os.getenv("CORS_ORIGINS", "")
+origins = [o.strip() for o in origins_raw.split(",") if o.strip()]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 
 class CodeRequest(BaseModel):
     code: str
@@ -12,7 +27,7 @@ class CodeRequest(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the Question Bank Generator API"}
+    return {"message": "Pudiste comunicarte con el servicio de generación de banco de preguntas :3 ¡Bienvenido!"}
 
 
 @app.post("/generate-xml")
